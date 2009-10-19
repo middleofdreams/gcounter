@@ -1,0 +1,30 @@
+GCounter Changelog
+
+0.5:
+ - extend tray icon support
+ - 1 typo fixed
+ - add multilanguage support
+ - add polish lang
+ - few functions are moved to module
+
+0.4:
+- some bugs fixed
+- add tray icon support
+- whole app split as 2 .py files
+- Reset default settings and Clear action history don't need to restart app anymore.
+
+
+GCounter zmiany
+
+0.5:
+ - dodano rozszerzoną obsługę ikony w tacce
+ - poprawiono jedną literówkę
+ - dodano obsługę wielu języków
+ - dodano język polski
+ - pare funkcji przeniesiono do modułu
+
+0.4:
+ - poprawiono parę błędów
+ - dodano obsługę ikony w tacce
+ - rozdzielono całą aplikacje na 2 pliki .py
+ - reset ustawień i wyczyszczenie historii aplikacji nie wymaga już restartu aplikacji
