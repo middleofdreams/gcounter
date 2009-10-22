@@ -22,7 +22,9 @@ def tryfiles():
 	f.close()
 	try:
 		f = open (prefs,"r")
+		ppp=True
 	except IOError:
+		ppp=False
 		if not os.path.isdir(workpath):
 			d = os.makedirs(workpath)
 		f=open (prefs,"w")
@@ -32,15 +34,16 @@ def tryfiles():
 		f.write("False\n")
 		f.write("\n")
 		f.write("\n")
-	if f.readline()=="":
-		f.close()		
-		f=open (prefs,"w")
-		f.write("1\n")
-		f.write("1\n")
-		f.write("False\n")
-		f.write("False\n")
-		f.write("\n")
-		f.write("\n")
+	if ppp:
+		if f.readline()=="":
+			f.close()		
+			f=open (prefs,"w")
+			f.write("1\n")
+			f.write("1\n")
+			f.write("False\n")
+			f.write("False\n")
+			f.write("\n")
+			f.write("\n")
 	f.close()	
 			
 	
