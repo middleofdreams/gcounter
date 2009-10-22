@@ -1,5 +1,10 @@
 GCounter Changelog
 
+0.6:
+  - default actions are executed by DBUS (you don't need sudo to this 
+  anymore... dbus-python also is not needed)
+  - preferences/userdata are now user-wide, not system-wide
+   
 0.5:
  - extend tray icon support
  - 1 typo fixed
