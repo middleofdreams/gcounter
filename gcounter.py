@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
-import sys,pygtk,gtk,gtk.glade,time,threading,gobject,os,locale
+import sys,pygtk,gtk,gtk.glade,time,threading,gobject,os,locale,dbus
 import data
 pygtk.require("2.0")
 global dir,userdata, userdata2
@@ -88,7 +88,6 @@ class glowna:
 		self.menu1 = self.wTree.get_widget("menu1")
 		self.elementy = gtk.ListStore(str)
 		self.combo1.set_model(self.elementy)
-		
 		self.combo2 = self.wTree.get_widget("comboboxentry2")
 		self.elementy2 = gtk.ListStore(str)
 		self.combo2.set_model(self.elementy2)
@@ -124,6 +123,7 @@ class glowna:
 		self.entry2.set_sensitive(0)
 		self.minuty = 0
 		self.sekundy = 0
+		data.preferences.tryfiles()
 		data.preferences.loaduserdata(self)
 		data.preferences.loadprefs(self)
 		self.countdown=False
@@ -206,11 +206,13 @@ class glowna:
 		if self.check.get_active():
 			self.window.hide()	
 		if self.op1.get_active():
-			os.popen("sudo pm-suspend")
+			comp.Suspend("int32:0")
+			os.popen("dbus-send --system --dest=org.freedesktop.Hal --type=method_call --print-reply /org/freedesktop/Hal/devices/computer  org.freedesktop.Hal.Device.SystemPowerManagement.Suspend int32:0")
 		elif self.op2.get_active():
-			os.popen("sudo halt")
+			os.popen("dbus-send --system --dest=org.freedesktop.Hal --type=method_call --print-reply /org/freedesktop/Hal/devices/computer  org.freedesktop.Hal.Device.SystemPowerManagement.Shutdown int32:0")
 		elif self.op3.get_active():
-			os.popen("sudo reboot")
+			os.popen("dbus-send --system --dest=org.freedesktop.Hal --type=method_call --print-reply /org/freedesktop/Hal/devices/computer  org.freedesktop.Hal.Device.SystemPowerManagement.Reboot int32:0")
+
 		else:
 			os.popen(self.entry1.get_text())
 		if self.check.get_active():

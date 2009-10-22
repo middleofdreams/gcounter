@@ -1,10 +1,55 @@
 import os,sys
 dir=os.path.abspath(os.path.dirname(sys.argv[0]))+"/data"
-userdata=dir+"/userdata.opt"
-userdata2=dir+"/userdata2.opt"
+workpath=os.environ['HOME']+"/.gcounter"
+userdata=workpath+"/userdata.opt"
+userdata2=workpath+"/userdata2.opt"
+prefs=workpath+"/prefs.opt"
+
+def tryfiles():
+	try:
+		f = open (userdata,"r")
+	except IOError:
+		if not os.path.isdir(workpath):
+			d = os.makedirs(workpath)
+		f=open (userdata,"w")
+	f.close()
+	try:
+		f = open (userdata2,"r")
+	except IOError:
+		if not os.path.isdir(workpath):
+			d = os.makedirs(workpath)
+		f=open (userdata2,"w")
+	f.close()
+	try:
+		f = open (prefs,"r")
+	except IOError:
+		if not os.path.isdir(workpath):
+			d = os.makedirs(workpath)
+		f=open (prefs,"w")
+		f.write("1\n")
+		f.write("1\n")
+		f.write("False\n")
+		f.write("False\n")
+		f.write("\n")
+		f.write("\n")
+	if f.readline()=="":
+		f.close()		
+		f=open (prefs,"w")
+		f.write("1\n")
+		f.write("1\n")
+		f.write("False\n")
+		f.write("False\n")
+		f.write("\n")
+		f.write("\n")
+	f.close()	
+			
 	
-def loaduserdata(gl):
-	f = open (userdata,"r")
+
+		
+
+
+def loaduserdata(gl):		
+	f=open(userdata, 'r')
 	if f.readline()=="":
 		gl.elementy.append(["notify-send ALARM!"])
 	f.close()
@@ -61,7 +106,7 @@ def saveuserdata(gl):
 			fa.close()
 				
 def loadprefs(gl):
-	f = open (dir+"/prefs.opt","r")
+	f = open (prefs,"r")
 	action=f.readline()
 	time=f.readline()
 	closeapp=f.readline().rstrip("\n")
@@ -119,7 +164,7 @@ def saveprefs(gl):
 	puserdata2=gl.entry2.get_text()			
 	
 		
-	f = open (dir+"/prefs.opt","w")
+	f = open (prefs,"w")
 	f.write(str(action)+"\n")
 	f.write(str(time)+"\n")
 	f.write(str(closeapp)+"\n")
