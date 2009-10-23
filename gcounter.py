@@ -206,7 +206,6 @@ class glowna:
 		if self.check.get_active():
 			self.window.hide()	
 		if self.op1.get_active():
-			comp.Suspend("int32:0")
 			os.popen("dbus-send --system --dest=org.freedesktop.Hal --type=method_call --print-reply /org/freedesktop/Hal/devices/computer  org.freedesktop.Hal.Device.SystemPowerManagement.Suspend int32:0")
 		elif self.op2.get_active():
 			os.popen("dbus-send --system --dest=org.freedesktop.Hal --type=method_call --print-reply /org/freedesktop/Hal/devices/computer  org.freedesktop.Hal.Device.SystemPowerManagement.Shutdown")
