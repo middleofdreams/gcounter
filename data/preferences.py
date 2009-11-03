@@ -4,8 +4,8 @@ import gdbm
 
 dir=os.path.abspath(os.path.dirname(sys.argv[0]))+"/data"
 workpath=os.environ['HOME']+"/.gcounter"
-userdata=workpath+"/userdata.opt"
-userdata2=workpath+"/userdata2.opt"
+userdata=workpath+"/userdata.db"
+userdata2=workpath+"/userdata2.db"
 prefs=workpath+"/prefs.db"
 
 def tryfiles():
@@ -39,7 +39,7 @@ def loaduserdata(gl):
 	else:
 		k = d.firstkey()
 		while k != None:
-			gl.elementy.prepend([d[k]])
+			gl.elementy2.prepend([d[k]])
 			k = d.nextkey(k)
 	d.close()			
 	

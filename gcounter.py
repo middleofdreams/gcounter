@@ -6,8 +6,8 @@ pygtk.require("2.0")
 global dir,userdata, userdata2
 dir=os.path.abspath(os.path.dirname(sys.argv[0]))+"/data"
 workpath=os.environ['HOME']+"/.gcounter"
-userdata=workpath+"/userdata.opt"
-userdata2=workpath+"/userdata2.opt"
+userdata=workpath+"/userdata.db"
+userdata2=workpath+"/userdata2.db"
 prefs=workpath+"/prefs.db"
 
 
