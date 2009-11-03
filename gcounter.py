@@ -21,7 +21,7 @@ class licznik(threading.Thread):
 		
 			
 	 def odliczanie(self):	
-		self.minuty=gl.ile.get_value_as_int()
+		self.minuty=gl.ile.get_value_as_int()+gl.ileh.get_value_as_int()*60
 		self.sekundy=0
 		for i in range(self.minuty*60, 0, -1):
 			if gl.countdown==False:
@@ -30,14 +30,23 @@ class licznik(threading.Thread):
 				if self.sekundy==0:
 					self.sekundy=59	
 					self.minuty=self.minuty-1
-					gl.bar.push(0,gl.string_remains+": "+str(self.minuty)+" min "+str(self.sekundy)+" s")
-					gl.staticon.set_tooltip(gl.string_remains+": "+str(self.minuty)+" min "+str(self.sekundy)+" s")
+					if self.minuty>59:
+						gl.bar.push(0,gl.string_remains+": "+str(self.minuty/60)+" h "+str(self.minuty%60)+" min "+str(self.sekundy)+" s")
+						gl.staticon.set_tooltip(gl.string_remains+": "+str(self.minuty/60)+" h "+str(self.minuty%60)+" min "+str(self.sekundy)+" s")
+					else:
+						gl.bar.push(0,gl.string_remains+": "+str(self.minuty)+" min "+str(self.sekundy)+" s")
+						gl.staticon.set_tooltip(gl.string_remains+": "+str(self.minuty)+" min "+str(self.sekundy)+" s")
 
 				else:
 					self.sekundy=self.sekundy-1
-					gl.bar.push(0,gl.string_remains+": "+str(self.minuty)+" min "+str(self.sekundy)+" s")
-					gl.staticon.set_tooltip(gl.string_remains+": "+str(self.minuty)+" min "+str(self.sekundy)+" s")
-				time.sleep(1)
+					if self.minuty>59:						
+						gl.bar.push(0,gl.string_remains+": "+str(self.minuty/60)+" h "+str(self.minuty%60)+" min "+str(self.sekundy)+" s")
+						gl.staticon.set_tooltip(gl.string_remains+": "+str(self.minuty/60)+" h "+str(self.minuty%60)+" min "+str(self.sekundy)+" s")
+					else:
+						gl.bar.push(0,gl.string_remains+": "+str(self.minuty)+" min "+str(self.sekundy)+" s")
+						gl.staticon.set_tooltip(gl.string_remains+": "+str(self.minuty)+" min "+str(self.sekundy)+" s")
+
+					time.sleep(1)
 				gl.staticon.set_blinking(True) 
 			
 			if gl.countdown:
@@ -70,6 +79,8 @@ class glowna:
 		self.op3 = self.wTree.get_widget("radiobutton3")
 		self.op4 = self.wTree.get_widget("radiobutton4")		
 		self.ile = self.wTree.get_widget("spinbutton1")
+		self.ileh = self.wTree.get_widget("spinbutton2")
+
 		self.btn1 = self.wTree.get_widget("button1")
 		self.btn2= self.wTree.get_widget("button2")
 		self.bar = self.wTree.get_widget("statusbar1")
@@ -163,6 +174,7 @@ class glowna:
 	def defaults(self, widget):
 		f = open (dir+"/prefs.opt","w")
 		f.write("1\n")
+		f.write("0\n")
 		f.write("1\n")
 		f.write("False\n")
 		f.write("False\n")

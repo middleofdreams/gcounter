@@ -30,6 +30,7 @@ def tryfiles():
 		f=open (prefs,"w")
 		f.write("1\n")
 		f.write("1\n")
+		f.write("0\n")
 		f.write("False\n")
 		f.write("False\n")
 		f.write("\n")
@@ -40,6 +41,7 @@ def tryfiles():
 			f=open (prefs,"w")
 			f.write("1\n")
 			f.write("1\n")
+			f.write("0\n")
 			f.write("False\n")
 			f.write("False\n")
 			f.write("\n")
@@ -112,6 +114,7 @@ def loadprefs(gl):
 	f = open (prefs,"r")
 	action=f.readline()
 	time=f.readline()
+	timeh=f.readline()
 	closeapp=f.readline().rstrip("\n")
 	runbefore=f.readline().rstrip("\n")
 	puserdata=f.readline()
@@ -132,6 +135,7 @@ def loadprefs(gl):
 		gl.entry1.set_sensitive(1)
 		gl.entry1.set_text(puserdata.rstrip("\n"))
 	gl.ile.set_value(float(str(time)))	
+	gl.ileh.set_value(float(str(timeh)))
 	if closeapp=="True":
 		gl.check.set_active(1)
 	else:
@@ -146,7 +150,8 @@ def loadprefs(gl):
 		gl.entry2.set_text("")
 
 def saveprefs(gl):
-	time=gl.ile.get_value_as_int()			
+	time=gl.ile.get_value_as_int()	
+	timeh=gl.ileh.get_value_as_int()			
 	if gl.check2.get_active():
 		runbefore="True"
 	else:
@@ -170,6 +175,7 @@ def saveprefs(gl):
 	f = open (prefs,"w")
 	f.write(str(action)+"\n")
 	f.write(str(time)+"\n")
+	f.write(str(timeh)+"\n")
 	f.write(str(closeapp)+"\n")
 	f.write(str(runbefore)+"\n")
 	f.write(str(puserdata)+"\n")
