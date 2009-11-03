@@ -1,5 +1,10 @@
 GCounter Changelog
 
+0.7: 
+   - few small bugfixes
+   - userdata and preferences are in GDBMs instead of plain files
+   - hours and minutes are splitted now
+   
 0.6:
   - default actions are executed by DBUS (you don't need sudo to this 
   anymore... dbus-python also is not needed)
