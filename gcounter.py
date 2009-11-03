@@ -1,13 +1,14 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
-import sys,pygtk,gtk,gtk.glade,time,threading,gobject,os,locale,dbus
+import sys,pygtk,gtk,gtk.glade,time,threading,gobject,os,locale,gdbm
 import data
 pygtk.require("2.0")
 global dir,userdata, userdata2
 dir=os.path.abspath(os.path.dirname(sys.argv[0]))+"/data"
-userdata=dir+"/userdata.opt"
-userdata2=dir+"/userdata2.opt"
-
+workpath=os.environ['HOME']+"/.gcounter"
+userdata=workpath+"/userdata.opt"
+userdata2=workpath+"/userdata2.opt"
+prefs=workpath+"/prefs.db"
 
 
 # klasa licznika - watki
@@ -159,12 +160,8 @@ class glowna:
 		self.about.hide()
 
 	def clear_history(self, widget):
-		f = open(userdata,"w")
-		f.write("")
-		f.close()
-		f = open(userdata2,"w")
-		f.write("")
-		f.close()
+		os.remove(userdata)
+		os.remove(userdata2)
 		self.elementy.clear()
 		self.elementy2.clear()
 		data.preferences.loaduserdata(self)
@@ -172,15 +169,15 @@ class glowna:
 		self.entry2.set_text("")
 			
 	def defaults(self, widget):
-		f = open (dir+"/prefs.opt","w")
-		f.write("1\n")
-		f.write("0\n")
-		f.write("1\n")
-		f.write("False\n")
-		f.write("False\n")
-		f.write("\n")
-		f.write("\n")
-		f.close()	
+		d = gdbm.open(prefs, 'c')
+		d["action"]="1"
+		d["minutes"]="1"
+		d["hours"]="0"
+		d["closeapp"]="False"
+		d["runbefore"]="False"
+		d["userdata1"]=""
+		d["userdata2"]=""
+		d.close()
 		data.preferences.loadprefs(self)
 	def entry2disen(self, widget):
 		if self.check2.get_active():

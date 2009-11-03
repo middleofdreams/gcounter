@@ -1,86 +1,53 @@
 import os,sys
+import gdbm
+
+
 dir=os.path.abspath(os.path.dirname(sys.argv[0]))+"/data"
 workpath=os.environ['HOME']+"/.gcounter"
 userdata=workpath+"/userdata.opt"
 userdata2=workpath+"/userdata2.opt"
-prefs=workpath+"/prefs.opt"
+prefs=workpath+"/prefs.db"
 
 def tryfiles():
-	try:
-		f = open (userdata,"r")
-	except IOError:
-		if not os.path.isdir(workpath):
-			d = os.makedirs(workpath)
-		f=open (userdata,"w")
-	f.close()
-	try:
-		f = open (userdata2,"r")
-	except IOError:
-		if not os.path.isdir(workpath):
-			d = os.makedirs(workpath)
-		f=open (userdata2,"w")
-	f.close()
-	try:
-		f = open (prefs,"r")
-		ppp=True
-	except IOError:
-		ppp=False
-		if not os.path.isdir(workpath):
-			d = os.makedirs(workpath)
-		f=open (prefs,"w")
-		f.write("1\n")
-		f.write("1\n")
-		f.write("0\n")
-		f.write("False\n")
-		f.write("False\n")
-		f.write("\n")
-		f.write("\n")
-	if ppp:
-		if f.readline()=="":
-			f.close()		
-			f=open (prefs,"w")
-			f.write("1\n")
-			f.write("1\n")
-			f.write("0\n")
-			f.write("False\n")
-			f.write("False\n")
-			f.write("\n")
-			f.write("\n")
-	f.close()	
-			
-	
-
-		
-
+	if not os.path.isdir(workpath):
+		os.makedirs(workpath)
+	d = gdbm.open(prefs, 'c')
+	if d.firstkey()==None:
+		d["action"]="1"
+		d["minutes"]="1"
+		d["hours"]="0"
+		d["closeapp"]="False"
+		d["runbefore"]="False"
+		d["userdata1"]=""
+		d["userdata2"]=""
+	d.close()
 
 def loaduserdata(gl):		
-	f=open(userdata, 'r')
-	if f.readline()=="":
+	d = gdbm.open(userdata, 'c')
+	if d.firstkey()==None:
 		gl.elementy.append(["notify-send ALARM!"])
-	f.close()
-	
-	f = open (userdata,"r")
-	for line in f.read().split('\n'):
-		if line!="":
-			gl.elementy.prepend([line])
-	
-	f.close()
-	
-	f = open (userdata2,"r")
-	if f.readline()=="":
+	else:
+		k = d.firstkey()
+		while k != None:
+			gl.elementy.prepend([d[k]])
+			k = d.nextkey(k)
+	d.close()
+
+	d = gdbm.open(userdata2, 'c')
+	if d.firstkey()==None:
 		gl.elementy2.append(["mpc pause"])
-	f.close()
+	else:
+		k = d.firstkey()
+		while k != None:
+			gl.elementy.prepend([d[k]])
+			k = d.nextkey(k)
+	d.close()			
 	
-	f = open (userdata2,"r")
-	for line in f.read().split('\n'):
-		if line!="":
-			gl.elementy2.prepend([line])
-		
-	f.close()
-		
 def saveuserdata(gl):
 	iter=gl.elementy.get_iter(0)
 	i=False
+	
+	
 	if gl.combo1.child.get_text()!="":
 		while iter:
 			if gl.combo1.child.get_text()!= gl.elementy.get_value(iter,0):
@@ -91,9 +58,10 @@ def saveuserdata(gl):
 			
 			iter=gl.elementy.iter_next(iter)
 		if i:
-			fa = open(userdata,"a")
-			fa.write(gl.combo1.child.get_text()+"\n")
-			fa.close()
+			d = gdbm.open(userdata, 'c')
+			l=len(d.keys())
+			d[str(l)]=str(gl.combo1.child.get_text())
+			d.close()
 	i=False
 	iter=gl.elementy2.get_iter(0)
 	if gl.combo2.child.get_text()!="":
@@ -106,21 +74,22 @@ def saveuserdata(gl):
 			
 			iter=gl.elementy2.iter_next(iter)
 		if i:
-			fa = open(userdata2,"a")
-			fa.write(gl.combo2.child.get_text()+"\n")
-			fa.close()
+			d = gdbm.open(userdata2, 'c')
+			l=len(d.keys())
+			d[str(l)]=str(gl.combo2.child.get_text())
+			d.close()
 				
 def loadprefs(gl):
-	f = open (prefs,"r")
-	action=f.readline()
-	time=f.readline()
-	timeh=f.readline()
-	closeapp=f.readline().rstrip("\n")
-	runbefore=f.readline().rstrip("\n")
-	puserdata=f.readline()
-	puserdata2=f.readline()
-	f.close()
-	action= int(action)
+	d = gdbm.open(prefs, 'r')
+	action=d["action"]
+	time=d["minutes"]
+	timeh=d["hours"]
+	closeapp=d["closeapp"]
+	runbefore=d["runbefore"]
+	puserdata=d["userdata1"]
+	puserdata2=d["userdata2"]
+	d.close()
+	action=int(action)
 	if action==1:
 		gl.op1.set_active(1)
 		gl.entry1.set_text("")
@@ -171,15 +140,14 @@ def saveprefs(gl):
 	puserdata=gl.entry1.get_text()
 	puserdata2=gl.entry2.get_text()			
 	
-		
-	f = open (prefs,"w")
-	f.write(str(action)+"\n")
-	f.write(str(time)+"\n")
-	f.write(str(timeh)+"\n")
-	f.write(str(closeapp)+"\n")
-	f.write(str(runbefore)+"\n")
-	f.write(str(puserdata)+"\n")
-	f.write(str(puserdata2)+"\n")
-	f.close()	
+	d = gdbm.open(prefs, 'c')
+	d["action"]=str(action)
+	d["minutes"]=str(time)
+	d["hours"]=str(timeh)
+	d["closeapp"]=str(closeapp)
+	d["runbefore"]=str(runbefore)
+	d["userdata1"]=str(puserdata)
+	d["userdata2"]=str(puserdata2)
+	d.close()	
 			
 

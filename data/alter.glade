@@ -593,7 +593,7 @@
     <property name="type_hint">normal</property>
     <property name="has_separator">False</property>
     <property name="program_name">GCounter</property>
-    <property name="version">0.5</property>
+    <property name="version">0.7</property>
     <property name="comments" translatable="yes">GCounter is small application written in python and py GTK library. It allows you to shutdown, reboot and suspend
 your computer at specific time. It is using sudo and shutdown, reboot, pm-suspend commands to standart actions.
 
