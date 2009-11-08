@@ -19,7 +19,7 @@
 #       MA 02110-1301, USA.
 
 import os,sys
-import gdbm,gtk
+import gdbm,gtk,pango
 
 
 dir=os.path.abspath(os.path.dirname(sys.argv[0]))+"/data"
