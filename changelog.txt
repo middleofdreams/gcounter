@@ -1,5 +1,11 @@
 GCounter Changelog
 
+0.8
+   - partial code clean up
+   - added some comments in code
+   - added preferences window
+   - added notifications support
+
 0.7: 
    - few small bugfixes
    - userdata and preferences are in GDBMs instead of plain files
