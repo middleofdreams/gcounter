@@ -35,6 +35,7 @@ def assignwidgets(mainclass):
 		mainclass.entry2 = mainclass.wTree.get_widget("comboboxentry2").child
 		mainclass.check = mainclass.wTree.get_widget("checkbutton1")
 		mainclass.check2 = mainclass.wTree.get_widget("checkbutton2")
+		mainclass.check5 = mainclass.wTree.get_widget("checkbutton5")
 		mainclass.combo1 = mainclass.wTree.get_widget("comboboxentry1")
 		mainclass.about = mainclass.wTree.get_widget("aboutdialog1")
 		mainclass.label1 = mainclass.wTree.get_widget("label1")
@@ -64,7 +65,8 @@ def assignwidgets(mainclass):
 		"clear_history" : mainclass.clear_history,
 		"preferences": mainclass.openprefs,
 		"prefssave":	mainclass.prefssave,
-		"prefscancel":	mainclass.prefscancel}
+		"prefscancel":	mainclass.prefscancel,
+		"on_checkbutton5_toggled": mainclass.notifytoggle}
 		mainclass.wTree.signal_autoconnect(dic)
 
 def createstatusicon(mainclass,dir):	

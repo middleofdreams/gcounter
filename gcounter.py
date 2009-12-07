@@ -143,6 +143,14 @@ class gcounter:
 			self.entry2.set_sensitive(1)
 		else:
 			self.entry2.set_sensitive(0)	
+	def notifytoggle(self, widget):
+		if self.check5.get_active():
+			self.wTree.get_widget("label12").set_sensitive(1)
+			self.wTree.get_widget("spinbutton3").set_sensitive(1)
+
+		else:
+			self.wTree.get_widget("label12").set_sensitive(0)
+			self.wTree.get_widget("spinbutton3").set_sensitive(0)
 		
 	def entry_dis(self, widget):
 		self.entry1.set_sensitive(0)
@@ -160,7 +168,7 @@ class gcounter:
 		self.mitem4.set_sensitive(1)
 		gl.gcprefs.saveuserdata(self)
 		gl.countdown=True
-		if self.trayopt2=="True": self.window.hide()
+		if self.gcprefs.trayopt2=="True": self.window.hide()
 	def button2_clicked(self, widget):
 		self.aaa.running=False	
 		self.btn1.set_sensitive(1)
@@ -170,7 +178,7 @@ class gcounter:
 		self.mitem4.set_sensitive(0)
 		self.window.show()
 	def akcja(self):
-		if self.defaction=="1":
+		if self.gcprefs.defaction=="1":
 			if self.check2.get_active():
 				os.popen(self.entry2.get_text())
 			if self.check.get_active():
@@ -185,7 +193,7 @@ class gcounter:
 			else:
 				os.popen(self.entry1.get_text())
 				
-		if self.defaction=="2":	
+		if self.gcprefs.defaction=="2":	
 			if self.check2.get_active():
 				os.popen(self.entry2.get_text())
 			if self.check.get_active():

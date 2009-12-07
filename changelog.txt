@@ -1,5 +1,9 @@
 GCounter Changelog
 
+0.9
+   - some bugfixes
+   - added one notification option
+
 0.8
    - partial code clean up
    - added some comments in code
