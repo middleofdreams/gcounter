@@ -1,5 +1,9 @@
 GCounter Changelog
 
+1.0
+   - added option to select specified time when action should be executed
+   - some gui improvements
+
 0.9
    - some bugfixes
    - added one notification option

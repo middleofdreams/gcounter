@@ -39,7 +39,7 @@ def assignwidgets(mainclass):
 		mainclass.combo1 = mainclass.wTree.get_widget("comboboxentry1")
 		mainclass.about = mainclass.wTree.get_widget("aboutdialog1")
 		mainclass.label1 = mainclass.wTree.get_widget("label1")
-		mainclass.label2 = mainclass.wTree.get_widget("label2")
+		mainclass.label2 = mainclass.wTree.get_widget("radiobutton7")
 		mainclass.mitem1 = mainclass.wTree.get_widget("imagemenuitem6")
 		mainclass.mitem2 = mainclass.wTree.get_widget("imagemenuitem7")
 		mainclass.mitem3 = mainclass.wTree.get_widget("menuitem6")
@@ -50,7 +50,10 @@ def assignwidgets(mainclass):
 		mainclass.combo2 = mainclass.wTree.get_widget("comboboxentry2")
 		mainclass.elementy2 = gtk.ListStore(str)
 		mainclass.combo2.set_model(mainclass.elementy2)
-		
+		mainclass.timewindow=mainclass.wTree.get_widget("dialog2")
+		mainclass.calendar=mainclass.wTree.get_widget("calendar2")
+		mainclass.hours=mainclass.wTree.get_widget("spinbutton4")
+		mainclass.minutes=mainclass.wTree.get_widget("spinbutton5")
 		mainclass.prefwindow = mainclass.wTree.get_widget("dialog1")
 		
 		dic = { "on_button1_clicked" : mainclass.button1_clicked,
@@ -66,8 +69,13 @@ def assignwidgets(mainclass):
 		"preferences": mainclass.openprefs,
 		"prefssave":	mainclass.prefssave,
 		"prefscancel":	mainclass.prefscancel,
-		"on_checkbutton5_toggled": mainclass.notifytoggle}
+		"on_checkbutton5_toggled": mainclass.notifytoggle,
+		"changetime":mainclass.changetime,
+		"timeclose":mainclass.timeclose,
+		"savedate":mainclass.savetime,
+		"getcurrent":mainclass.getcurrent}
 		mainclass.wTree.signal_autoconnect(dic)
+		mainclass.timewindow.connect("destroy",mainclass.timeclose)
 
 def createstatusicon(mainclass,dir):	
 	

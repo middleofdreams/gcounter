@@ -21,7 +21,7 @@
 #       MA 02110-1301, USA.
 
 #loading main libraries
-import sys,pygtk,gtk,gtk.glade,time,os,pango
+import sys,pygtk,gtk,gtk.glade,time,os,pango,datetime
 #trying to load python-notify
 try:
 	import pynotify
@@ -35,6 +35,7 @@ from data import *
 from data.widgets import *
 from data.countdown import *
 from data.preferences import *
+from data.datehelpers import *
 pygtk.require("2.0")
 
 #assign the main directory... usually /usr/share/gcounter
@@ -72,7 +73,7 @@ class gcounter:
 		self.gcprefs=gcpreferences()
 		self.gcprefs.loaduserdata(self)
 		self.gcprefs.loadprefs(self)
-		
+
 		#few control vars
 		self.countdown=False
 		self.quit=False
@@ -161,12 +162,15 @@ class gcounter:
 		
 	def button1_clicked(self, widget):
 		gl.gcprefs.saveprefs(self)
-		self.aaa=licznik(self,notifies)
+		way=1
+		if self.wTree.get_widget("radiobutton8").get_active():
+			way=2
+		self.aaa=licznik(self,notifies,way)
 		self.btn1.set_sensitive(0)
 		self.btn2.set_sensitive(1)
 		self.mitem3.set_sensitive(0)
 		self.mitem4.set_sensitive(1)
-		gl.gcprefs.saveuserdata(self)
+		gl.gcprefs.saveuserdata(self)	
 		gl.countdown=True
 		if self.gcprefs.trayopt2=="True": self.window.hide()
 	def button2_clicked(self, widget):
@@ -209,15 +213,49 @@ class gcounter:
 				os.popen(self.entry1.get_text())
 		if self.check.get_active():
 			gtk.main_quit()
+	def changetime(self,widget):
+		self.minutes.set_value(self.exact_time[4])
+		self.hours.set_value(self.exact_time[3])
+		self.calendar.select_day(self.exact_time[2])
+		self.calendar.select_month(self.exact_time[1]-1,self.exact_time[0])
+
+		if self.timewindow.run():
+			self.timewindow.hide()
+	def timeclose(self,widget):
+		self.timewindow.hide()
 	
+	def savetime(self,widget):
+		dat=self.calendar.get_date()
+		print dat
+		dat,r=check_date(dat)
+		hours=self.hours.get_value_as_int()
+		minutes=self.minutes.get_value_as_int()
+		if r:
+			hours,minutes=check_time(hours,minutes)
+		dat=dat+(hours,minutes)
+		self.exact_time=dat
+		
+		self.time_to_label(dat)
+		
+		self.timewindow.hide()
+	def time_to_label(self,dat):
+		label=self.wTree.get_widget("label2")
+		frmdat="%i:%i %i-%i-%i"% (int(dat[3]), int(dat[4]), int(dat[2]), int(dat[1]), int(dat[0]))
+		label.set_text(frmdat)
+
 	def mainquit(self, widget):
 		if self.countdown:
 			self.countdown=False
 		self.quit=True
 		gtk.main_quit()
 		
+	def getcurrent(self,widget):
+		now=datetime.datetime.now()
+		self.calendar.select_day(now.day)
+		self.calendar.select_month(now.month-1,now.year)
+		self.hours.set_value(now.hour)
+		self.minutes.set_value(now.minute)
 	
-			
 # wywołanie aplikacji
 if __name__ == "__main__":
 	gtk.gdk.threads_init()

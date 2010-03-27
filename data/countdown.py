@@ -18,21 +18,37 @@
 #       Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
 #       MA 02110-1301, USA.
 
-import threading,time,notification,preferences
+import threading,time,notification,preferences,datetime
+from datehelpers import *
+
 
 class licznik(threading.Thread):
 	
 	 
-	 def __init__ (self, gl,notifies):
+	 def __init__ (self, gl,notifies,way):
 		threading.Thread.__init__(self)
 		gl.countdown= True
 		self.gl=gl
 		self.notifies=notifies
+		self.way=way
 		threading.Thread(target=self.odliczanie,args=()).start()
 			
-	 def odliczanie(self):	
-		self.minuty=self.gl.ile.get_value_as_int()+self.gl.ileh.get_value_as_int()*60
-		self.sekundy=0
+	 def odliczanie(self):
+		print self.way
+		if self.way==1:
+			self.minuty=self.gl.ile.get_value_as_int()+self.gl.ileh.get_value_as_int()*60
+			self.sekundy=0
+		elif self.way==2:
+			date,r=check_date(self.gl.exact_time,False)
+			print date
+			y,m,d,h,minutes=date
+			if r: h,minutes=check_time(h,minutes)
+			now=datetime.datetime.now()
+			diff=datetime.datetime(y,m,d,h,minutes+1,0,0)-now
+			print diff.seconds/60
+			self.minuty=diff.seconds/60+diff.days*24*60
+			self.sekundy=0	
+			if self.minuty==0:self.minuty=1
 		for i in range(self.minuty*60, 0, -1):
 			if self.gl.countdown==False:
 				break

@@ -222,7 +222,6 @@
                         </child>
                         <child>
                           <widget class="GtkComboBoxEntry" id="comboboxentry1">
-                            <property name="width_request">125</property>
                             <property name="visible">True</property>
                             <property name="tooltip" translatable="yes">	</property>
                             <property name="items" translatable="yes"></property>
@@ -259,31 +258,46 @@
                 <property name="orientation">vertical</property>
                 <property name="spacing">2</property>
                 <child>
-                  <widget class="GtkLabel" id="label2">
-                    <property name="width_request">24</property>
-                    <property name="height_request">30</property>
+                  <widget class="GtkRadioButton" id="radiobutton7">
+                    <property name="label" translatable="yes">When the time runs out:</property>
                     <property name="visible">True</property>
-                    <property name="label" translatable="yes">In specified time:</property>
+                    <property name="can_focus">True</property>
+                    <property name="receives_default">False</property>
+                    <property name="active">True</property>
+                    <property name="draw_indicator">True</property>
                   </widget>
                   <packing>
                     <property name="expand">False</property>
-                    <property name="fill">False</property>
-                    <property name="padding">1</property>
                     <property name="position">0</property>
                   </packing>
                 </child>
                 <child>
-                  <widget class="GtkVBox" id="vbox4">
+                  <widget class="GtkHBox" id="hbox3">
+                    <property name="height_request">40</property>
                     <property name="visible">True</property>
-                    <property name="orientation">vertical</property>
                     <child>
-                      <widget class="GtkHBox" id="hbox3">
-                        <property name="height_request">40</property>
+                      <widget class="GtkFixed" id="fixed1">
+                        <property name="width_request">59</property>
+                        <property name="visible">True</property>
+                      </widget>
+                      <packing>
+                        <property name="expand">False</property>
+                        <property name="fill">False</property>
+                        <property name="position">0</property>
+                      </packing>
+                    </child>
+                    <child>
+                      <widget class="GtkHBox" id="hbox4">
                         <property name="visible">True</property>
                         <child>
-                          <widget class="GtkFixed" id="fixed1">
-                            <property name="width_request">59</property>
+                          <widget class="GtkSpinButton" id="spinbutton2">
+                            <property name="width_request">44</property>
                             <property name="visible">True</property>
+                            <property name="can_focus">True</property>
+                            <property name="invisible_char">&#x25CF;</property>
+                            <property name="adjustment">1 0 666 1 8 0</property>
+                            <property name="climb_rate">0.02</property>
+                            <property name="numeric">True</property>
                           </widget>
                           <packing>
                             <property name="expand">False</property>
@@ -292,96 +306,133 @@
                           </packing>
                         </child>
                         <child>
-                          <widget class="GtkHBox" id="hbox4">
+                          <widget class="GtkLabel" id="label4">
+                            <property name="width_request">14</property>
+                            <property name="height_request">23</property>
                             <property name="visible">True</property>
-                            <child>
-                              <widget class="GtkSpinButton" id="spinbutton2">
-                                <property name="width_request">44</property>
-                                <property name="visible">True</property>
-                                <property name="can_focus">True</property>
-                                <property name="invisible_char">&#x2022;</property>
-                                <property name="adjustment">1 0 666 1 8 0</property>
-                                <property name="climb_rate">0.02</property>
-                                <property name="numeric">True</property>
-                              </widget>
-                              <packing>
-                                <property name="expand">False</property>
-                                <property name="fill">False</property>
-                                <property name="position">0</property>
-                              </packing>
-                            </child>
-                            <child>
-                              <widget class="GtkLabel" id="label4">
-                                <property name="width_request">14</property>
-                                <property name="height_request">23</property>
-                                <property name="visible">True</property>
-                                <property name="label" translatable="yes">h</property>
-                              </widget>
-                              <packing>
-                                <property name="expand">False</property>
-                                <property name="position">1</property>
-                              </packing>
-                            </child>
-                            <child>
-                              <widget class="GtkFixed" id="fixed8">
-                                <property name="width_request">8</property>
-                                <property name="visible">True</property>
-                              </widget>
-                              <packing>
-                                <property name="expand">False</property>
-                                <property name="fill">False</property>
-                                <property name="position">2</property>
-                              </packing>
-                            </child>
-                            <child>
-                              <widget class="GtkSpinButton" id="spinbutton1">
-                                <property name="width_request">42</property>
-                                <property name="visible">True</property>
-                                <property name="can_focus">True</property>
-                                <property name="invisible_char">&#x2022;</property>
-                                <property name="adjustment">1 1 59 1 8 0</property>
-                                <property name="climb_rate">0.02</property>
-                                <property name="numeric">True</property>
-                              </widget>
-                              <packing>
-                                <property name="expand">False</property>
-                                <property name="fill">False</property>
-                                <property name="position">3</property>
-                              </packing>
-                            </child>
-                            <child>
-                              <widget class="GtkLabel" id="label3">
-                                <property name="width_request">30</property>
-                                <property name="height_request">23</property>
-                                <property name="visible">True</property>
-                                <property name="label" translatable="yes">min</property>
-                              </widget>
-                              <packing>
-                                <property name="expand">False</property>
-                                <property name="position">4</property>
-                              </packing>
-                            </child>
+                            <property name="label" translatable="yes">h</property>
                           </widget>
                           <packing>
                             <property name="expand">False</property>
-                            <property name="fill">False</property>
                             <property name="position">1</property>
                           </packing>
                         </child>
                         <child>
-                          <widget class="GtkFixed" id="fixed2">
+                          <widget class="GtkFixed" id="fixed8">
+                            <property name="width_request">8</property>
                             <property name="visible">True</property>
                           </widget>
                           <packing>
+                            <property name="expand">False</property>
+                            <property name="fill">False</property>
                             <property name="position">2</property>
+                          </packing>
+                        </child>
+                        <child>
+                          <widget class="GtkSpinButton" id="spinbutton1">
+                            <property name="width_request">42</property>
+                            <property name="visible">True</property>
+                            <property name="can_focus">True</property>
+                            <property name="invisible_char">&#x25CF;</property>
+                            <property name="adjustment">1 1 59 1 8 0</property>
+                            <property name="climb_rate">0.02</property>
+                            <property name="numeric">True</property>
+                          </widget>
+                          <packing>
+                            <property name="expand">False</property>
+                            <property name="fill">False</property>
+                            <property name="position">3</property>
+                          </packing>
+                        </child>
+                        <child>
+                          <widget class="GtkLabel" id="label3">
+                            <property name="width_request">30</property>
+                            <property name="height_request">23</property>
+                            <property name="visible">True</property>
+                            <property name="label" translatable="yes">min</property>
+                          </widget>
+                          <packing>
+                            <property name="expand">False</property>
+                            <property name="position">4</property>
                           </packing>
                         </child>
                       </widget>
                       <packing>
                         <property name="expand">False</property>
+                        <property name="fill">False</property>
+                        <property name="position">1</property>
+                      </packing>
+                    </child>
+                    <child>
+                      <widget class="GtkFixed" id="fixed2">
+                        <property name="visible">True</property>
+                      </widget>
+                      <packing>
+                        <property name="position">2</property>
+                      </packing>
+                    </child>
+                  </widget>
+                  <packing>
+                    <property name="expand">False</property>
+                    <property name="position">1</property>
+                  </packing>
+                </child>
+                <child>
+                  <widget class="GtkVBox" id="vbox9">
+                    <property name="visible">True</property>
+                    <property name="orientation">vertical</property>
+                    <child>
+                      <widget class="GtkRadioButton" id="radiobutton8">
+                        <property name="label" translatable="yes">At exact time:</property>
+                        <property name="visible">True</property>
+                        <property name="can_focus">True</property>
+                        <property name="receives_default">False</property>
+                        <property name="active">True</property>
+                        <property name="draw_indicator">True</property>
+                        <property name="group">radiobutton7</property>
+                      </widget>
+                      <packing>
                         <property name="position">0</property>
                       </packing>
                     </child>
+                    <child>
+                      <widget class="GtkHBox" id="hbox14">
+                        <property name="visible">True</property>
+                        <child>
+                          <widget class="GtkLabel" id="label2">
+                            <property name="visible">True</property>
+                            <property name="label" translatable="yes">label</property>
+                          </widget>
+                          <packing>
+                            <property name="position">0</property>
+                          </packing>
+                        </child>
+                        <child>
+                          <widget class="GtkButton" id="button5">
+                            <property name="label" translatable="yes">change</property>
+                            <property name="visible">True</property>
+                            <property name="can_focus">True</property>
+                            <property name="receives_default">True</property>
+                            <signal name="clicked" handler="changetime"/>
+                          </widget>
+                          <packing>
+                            <property name="position">1</property>
+                          </packing>
+                        </child>
+                      </widget>
+                      <packing>
+                        <property name="position">1</property>
+                      </packing>
+                    </child>
+                  </widget>
+                  <packing>
+                    <property name="position">2</property>
+                  </packing>
+                </child>
+                <child>
+                  <widget class="GtkVBox" id="vbox4">
+                    <property name="visible">True</property>
+                    <property name="orientation">vertical</property>
                     <child>
                       <widget class="GtkHBox" id="hbox5">
                         <property name="visible">True</property>
@@ -445,7 +496,6 @@
                                 </child>
                                 <child>
                                   <widget class="GtkComboBoxEntry" id="comboboxentry2">
-                                    <property name="width_request">125</property>
                                     <property name="visible">True</property>
                                     <property name="has_tooltip">True</property>
                                     <property name="items" translatable="yes"></property>
@@ -470,7 +520,7 @@
                       <packing>
                         <property name="expand">False</property>
                         <property name="fill">False</property>
-                        <property name="position">1</property>
+                        <property name="position">0</property>
                       </packing>
                     </child>
                     <child>
@@ -510,10 +560,28 @@
                             <property name="y">6</property>
                           </packing>
                         </child>
+                        <child>
+                          <widget class="GtkCalendar" id="calendar1">
+                            <property name="width_request">100</property>
+                            <property name="height_request">80</property>
+                            <property name="visible">True</property>
+                            <property name="can_focus">True</property>
+                            <property name="year">2010</property>
+                            <property name="month">2</property>
+                            <property name="day">22</property>
+                          </widget>
+                          <packing>
+                            <property name="x">32</property>
+                            <property name="y">25</property>
+                          </packing>
+                        </child>
                       </widget>
                       <packing>
-                        <property name="position">2</property>
+                        <property name="position">1</property>
                       </packing>
+                    </child>
+                    <child>
+                      <placeholder/>
                     </child>
                     <child>
                       <widget class="GtkFixed" id="fixed5">
@@ -528,7 +596,7 @@
                     </child>
                   </widget>
                   <packing>
-                    <property name="position">1</property>
+                    <property name="position">4</property>
                   </packing>
                 </child>
               </widget>
@@ -605,8 +673,8 @@
     <property name="type_hint">normal</property>
     <property name="has_separator">False</property>
     <property name="program_name">GCounter</property>
-    <property name="version">0.9</property>
-    <property name="copyright" translatable="yes">2009 Copyright Kuba Wro&#x17C;yna
+    <property name="version">1.0rc</property>
+    <property name="copyright" translatable="yes">2010 Copyright Kuba Wro&#x17C;yna
 middleofdreams@gmail.com</property>
     <property name="comments" translatable="yes">GCounter is small application written in python and py GTK library.
  It allows you to shutdown, reboot and suspend computer at specific time. 
@@ -1066,6 +1134,135 @@ It has dbus and libnotify support.
                 <property name="fill">False</property>
                 <property name="position">1</property>
               </packing>
+            </child>
+          </widget>
+          <packing>
+            <property name="expand">False</property>
+            <property name="pack_type">end</property>
+            <property name="position">0</property>
+          </packing>
+        </child>
+      </widget>
+    </child>
+  </widget>
+  <widget class="GtkDialog" id="dialog2">
+    <property name="border_width">5</property>
+    <property name="title" translatable="yes">Select date and time</property>
+    <property name="modal">True</property>
+    <property name="window_position">mouse</property>
+    <property name="type_hint">normal</property>
+    <property name="has_separator">False</property>
+    <signal name="close" handler="timeclose"/>
+    <child internal-child="vbox">
+      <widget class="GtkVBox" id="dialog-vbox3">
+        <property name="visible">True</property>
+        <property name="orientation">vertical</property>
+        <property name="spacing">2</property>
+        <child>
+          <widget class="GtkCalendar" id="calendar2">
+            <property name="visible">True</property>
+            <property name="can_focus">True</property>
+            <property name="year">2010</property>
+          </widget>
+          <packing>
+            <property name="position">1</property>
+          </packing>
+        </child>
+        <child>
+          <widget class="GtkHBox" id="hbox15">
+            <property name="visible">True</property>
+            <child>
+              <widget class="GtkLabel" id="label14">
+                <property name="visible">True</property>
+                <property name="label" translatable="yes">Czas</property>
+              </widget>
+              <packing>
+                <property name="position">0</property>
+              </packing>
+            </child>
+            <child>
+              <widget class="GtkSpinButton" id="spinbutton4">
+                <property name="visible">True</property>
+                <property name="can_focus">True</property>
+                <property name="max_length">2</property>
+                <property name="invisible_char">&#x25CF;</property>
+                <property name="adjustment">0 0 24 1 10 8</property>
+                <property name="snap_to_ticks">True</property>
+                <property name="numeric">True</property>
+              </widget>
+              <packing>
+                <property name="expand">False</property>
+                <property name="fill">False</property>
+                <property name="position">1</property>
+              </packing>
+            </child>
+            <child>
+              <widget class="GtkLabel" id="label13">
+                <property name="visible">True</property>
+                <property name="label" translatable="yes">:</property>
+                <property name="width_chars">1</property>
+              </widget>
+              <packing>
+                <property name="expand">False</property>
+                <property name="fill">False</property>
+                <property name="position">2</property>
+              </packing>
+            </child>
+            <child>
+              <widget class="GtkSpinButton" id="spinbutton5">
+                <property name="visible">True</property>
+                <property name="can_focus">True</property>
+                <property name="max_length">2</property>
+                <property name="invisible_char">&#x25CF;</property>
+                <property name="adjustment">0 0 59 1 10 9</property>
+              </widget>
+              <packing>
+                <property name="expand">False</property>
+                <property name="fill">False</property>
+                <property name="position">3</property>
+              </packing>
+            </child>
+          </widget>
+          <packing>
+            <property name="expand">False</property>
+            <property name="position">2</property>
+          </packing>
+        </child>
+        <child>
+          <widget class="GtkButton" id="button6">
+            <property name="label" translatable="yes">Save</property>
+            <property name="visible">True</property>
+            <property name="can_focus">True</property>
+            <property name="receives_default">True</property>
+            <signal name="clicked" handler="savedate"/>
+          </widget>
+          <packing>
+            <property name="expand">False</property>
+            <property name="fill">False</property>
+            <property name="position">3</property>
+          </packing>
+        </child>
+        <child>
+          <widget class="GtkButton" id="button7">
+            <property name="label" translatable="yes">Get current time</property>
+            <property name="visible">True</property>
+            <property name="can_focus">True</property>
+            <property name="receives_default">True</property>
+            <signal name="clicked" handler="getcurrent"/>
+          </widget>
+          <packing>
+            <property name="position">4</property>
+          </packing>
+        </child>
+        <child internal-child="action_area">
+          <widget class="GtkHButtonBox" id="dialog-action_area3">
+            <property name="visible">True</property>
+            <property name="layout_style">end</property>
+            <child>
+              <placeholder/>
+            </child>
+            <child>
+              <placeholder/>
             </child>
           </widget>
           <packing>

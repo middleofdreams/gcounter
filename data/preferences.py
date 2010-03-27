@@ -27,6 +27,7 @@ workpath=os.environ['HOME']+"/.gcounter"
 userdata=workpath+"/userdata.db"
 userdata2=workpath+"/userdata2.db"
 prefs=workpath+"/prefs.db"
+from datehelpers import *
 
 
 class gcpreferences():
@@ -130,7 +131,22 @@ class gcpreferences():
 		runbefore=d["runbefore"]
 		puserdata=d["userdata1"]
 		puserdata2=d["userdata2"]
+		try:
+			exact_time=d["date"]
+			
+		except:
+			import datetime
+			now = datetime.datetime.now()
+			exact_time=now.strftime("(%Y,%m,%d,%H,%M)")
+		try:
+			way=d["way"]
+		except:
+			way="1"
 		d.close()
+		exact_time=time_to_tuple(exact_time)
+		mainclass.time_to_label(exact_time)
+		mainclass.exact_time=exact_time
+		
 		action=int(action)
 		if action==1:
 			mainclass.op1.set_active(1)
@@ -159,6 +175,8 @@ class gcpreferences():
 			mainclass.check2.set_active(0)
 			mainclass.entry2.set_sensitive(0)	
 			mainclass.entry2.set_text("")
+		if way=="2":
+			mainclass.wTree.get_widget("radiobutton8").set_active(1)
 		self.loadmainprefs(mainclass)
 		
 	def saveprefs(self,mainclass):
@@ -182,7 +200,10 @@ class gcpreferences():
 			action=4
 		puserdata=mainclass.entry1.get_text()
 		puserdata2=mainclass.entry2.get_text()			
-		
+		if mainclass.wTree.get_widget("radiobutton8").get_active():
+			way="2"
+		else:
+			way="1"
 		d = gdbm.open(prefs, 'c')
 		d["action"]=str(action)
 		d["minutes"]=str(time)
@@ -191,6 +212,9 @@ class gcpreferences():
 		d["runbefore"]=str(runbefore)
 		d["userdata1"]=str(puserdata)
 		d["userdata2"]=str(puserdata2)
+		d["date"]=str(mainclass.exact_time)
+		d["way"]=way
+
 		d.close()	
 				
 	def loadmainprefs(self,mainclass):
@@ -214,8 +238,10 @@ class gcpreferences():
 			self.trayopt2=d["p_trayopt2"]
 			self.notif=d["p_notif"]
 			self.notime=d["p_notime"]
-		d.close()
 		
+		
+		d.close()
+
 		if self.defaction=="2": mainclass.wTree.get_widget("radiobutton6").set_active(True)
 		else: mainclass.wTree.get_widget("radiobutton5").set_active(True)
 		
@@ -233,7 +259,6 @@ class gcpreferences():
 		mainclass.wTree.get_widget("spinbutton3").set_value(float(self.notime))
 	def savemainprefs(self,mainclass):
 		
-		
 		if mainclass.wTree.get_widget("radiobutton6").get_active():
 			mainclass.defaction="2"
 		else: mainclass.defaction="1"
@@ -250,4 +275,5 @@ class gcpreferences():
 		d["p_trayopt2"]=mainclass.trayopt2
 		d["p_notif"]=mainclass.notif
 		d["p_notime"]=mainclass.notime
+	
 		d.close()

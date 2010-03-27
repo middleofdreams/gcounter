@@ -20,8 +20,13 @@
 #       MA 02110-1301, USA.
 
 def set(gl):
+	strings=["Wybierz akcję:","Gdy minie czas:","O konkretnym czasie:",\
+	"Uśpij komputer","Wyłącz komputer","Uruchom ponownie komputer","Akcja użytkownika",\
+	"Wykonaj akcję przed"]
 	gl.label1.set_label("Wybierz akcję:")
-	gl.label2.set_label("W następującym czasie")
+	gl.label2.set_label("Gdy minie czas:")
+	gl.wTree.get_widget("radiobutton8").set_label("O konkretnym czasie:")
+
 	gl.op1.set_label("Uśpij komputer")
 	gl.op2.set_label("Wyłącz komputer")
 	gl.op3.set_label("Uruchom ponownie komputer")
