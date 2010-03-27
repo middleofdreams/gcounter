@@ -226,7 +226,6 @@ class gcounter:
 	
 	def savetime(self,widget):
 		dat=self.calendar.get_date()
-		print dat
 		dat,r=check_date(dat)
 		hours=self.hours.get_value_as_int()
 		minutes=self.minutes.get_value_as_int()

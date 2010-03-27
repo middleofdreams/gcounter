@@ -34,18 +34,15 @@ class licznik(threading.Thread):
 		threading.Thread(target=self.odliczanie,args=()).start()
 			
 	 def odliczanie(self):
-		print self.way
 		if self.way==1:
 			self.minuty=self.gl.ile.get_value_as_int()+self.gl.ileh.get_value_as_int()*60
 			self.sekundy=0
 		elif self.way==2:
 			date,r=check_date(self.gl.exact_time,False)
-			print date
 			y,m,d,h,minutes=date
 			if r: h,minutes=check_time(h,minutes)
 			now=datetime.datetime.now()
 			diff=datetime.datetime(y,m,d,h,minutes+1,0,0)-now
-			print diff.seconds/60
 			self.minuty=diff.seconds/60+diff.days*24*60
 			self.sekundy=0	
 			if self.minuty==0:self.minuty=1
