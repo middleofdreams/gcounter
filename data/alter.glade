@@ -673,13 +673,14 @@
     <property name="type_hint">normal</property>
     <property name="has_separator">False</property>
     <property name="program_name">GCounter</property>
-    <property name="version">1.0rc</property>
+    <property name="version">1.0rc3</property>
     <property name="copyright" translatable="yes">2010 Copyright Kuba Wro&#x17C;yna
 middleofdreams@gmail.com</property>
     <property name="comments" translatable="yes">GCounter is small application written in python and py GTK library.
  It allows you to shutdown, reboot and suspend computer at specific time. 
 It has dbus and libnotify support.
 
+If you have any question, found bug or have an idea what can be improoved - Please mail me.
 
 </property>
     <property name="website">http://middleofdreams.wordpress.com/gcounter</property>

@@ -33,7 +33,7 @@ def set(gl):
 	gl.op4.set_label("Akcja użytkownika")
 	gl.check2.set_label("Wykonaj akcję przed:")
 	gl.check.set_label("Zamknij program po wykonaniu")
-	gl.about.set_comments("Gcounter to aplikacja napisana w języku python z wkorzystaniem biblioteki pyGTK.\nPozwala ona na wyłączenie, ponowne uruchomienie bądź uśpienie komputera o podanym czasie. Posiada wsparcie dla DBus i LibNotify")
+	gl.about.set_comments("Gcounter to aplikacja napisana w języku python z wkorzystaniem biblioteki pyGTK.\nPozwala ona na wyłączenie, ponowne uruchomienie bądź uśpienie komputera o podanym czasie. Posiada wsparcie dla DBus i LibNotify\n\nJeśli masz jakiekolwiek pytania, znalazłeź błąd, bądź masz pomysł co można zmienić - proszę napisz do mnie.")
 	gl.string_remains="Pozostało"
 	gl.string_ready="Gotowy"
 	gl.string_stopped="Zatrzymano"

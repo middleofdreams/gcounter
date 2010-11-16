@@ -260,20 +260,20 @@ class gcpreferences():
 	def savemainprefs(self,mainclass):
 		
 		if mainclass.wTree.get_widget("radiobutton6").get_active():
-			mainclass.defaction="2"
-		else: mainclass.defaction="1"
-		if mainclass.wTree.get_widget("checkbutton3").get_active(): mainclass.trayopt1="True"
-		else: mainclass.trayopt1="False"
-		if mainclass.wTree.get_widget("checkbutton4").get_active(): mainclass.trayopt2="True"
-		else: mainclass.trayopt2="False"
-		if mainclass.wTree.get_widget("checkbutton5").get_active(): mainclass.notif="True"
-		else: mainclass.notif="False"
-		mainclass.notime=str(mainclass.wTree.get_widget("spinbutton3").get_value_as_int())
+			self.defaction="2"
+		else: self.defaction="1"
+		if mainclass.wTree.get_widget("checkbutton3").get_active(): self.trayopt1="True"
+		else: self.trayopt1="False"
+		if mainclass.wTree.get_widget("checkbutton4").get_active(): self.trayopt2="True"
+		else: self.trayopt2="False"
+		if mainclass.wTree.get_widget("checkbutton5").get_active(): self.notif="True"
+		else: self.notif="False"
+		self.notime=str(mainclass.wTree.get_widget("spinbutton3").get_value_as_int())
 		d = gdbm.open(prefs, 'c')
-		d["p_defaction"]=mainclass.defaction
-		d["p_trayopt1"]=mainclass.trayopt1
-		d["p_trayopt2"]=mainclass.trayopt2
-		d["p_notif"]=mainclass.notif
-		d["p_notime"]=mainclass.notime
-	
+		d["p_defaction"]=self.defaction
+		d["p_trayopt1"]=self.trayopt1
+		d["p_trayopt2"]=self.trayopt2
+		d["p_notif"]=self.notif
+		d["p_notime"]=self.notime
+
 		d.close()
