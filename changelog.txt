@@ -1,6 +1,8 @@
 GCounter Changelog
-
-1.0
+1.0rc3
+   - some fixes about saving preferences.
+   - calling python2 executable now, not python
+1.0rc
    - added option to select specified time when action should be executed
    - some gui improvements
 
