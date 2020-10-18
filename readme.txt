@@ -4,5 +4,3 @@ suggest - please submit.
 
 If you want to help with developing, packaging - mail to me: 
 middleofdreams@gmail.com
-
-ss
